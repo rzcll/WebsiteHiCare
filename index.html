@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiCare - Pesan Pengingat Untuk Masyarakat Hidup Sehatt</title>
+    <title>WeCare - Layanan Ekosistem Kesehatan Digital Premium</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <script>
@@ -17,202 +23,270 @@
                     fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
                     colors: {
                         brand: {
-                            500: '#0d9488',
+                            500: '#0d9488', // Teal
                             600: '#0f766e',
-                            shadow: 'rgba(0, 0, 0, 0.25)'
-                        }
+                            700: '#0f3a37', // Dark Teal
+                        },
+                        accent: {
+                            500: '#f97316', // Orange
+                            600: '#ea580c'
+                        },
+                        surface: '#F4F6F8' // Light Grey Premium
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Gaya Dasar Website */
+        /* Gaya Dasar & Latar Belakang Premium */
         body {
-            background-color: #F3F4F6; /* Light Grey Background */
-            color: #1F2937;
+            background-color: #F4F6F8;
+            color: #1E293B;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Efek Kaca Transparan (Glassmorphism) */
+        /* Efek Kaca Utama - Bersih & Profesional */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15); /* Bayangan Gelap */
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 40px -10px rgba(15, 58, 55, 0.15); /* Bayangan Gelap Lembut */
             border-radius: 24px;
         }
 
+        /* Kartu Menu Paket */
         .glass-card {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Efek Hover Orange pada Kartu Paket */
+        /* Efek Hover Orange yang Mewah */
         .glass-card:hover {
-            transform: translateY(-10px);
-            background: rgba(249, 115, 22, 0.15); /* Sentuhan kaca transparan warna orange */
-            border: 1px solid rgba(249, 115, 22, 0.5); /* Border orange transparan */
-            box-shadow: 0 35px 60px -15px rgba(249, 115, 22, 0.3); /* Cahaya glow orange */
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(249, 115, 22, 0.4); /* Border Orange */
+            box-shadow: 0 25px 50px -12px rgba(249, 115, 22, 0.25); /* Glow Orange */
         }
 
-        /* Scrollbar kustom */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        /* Scrollbar Elegan */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
 
-        /* Elemen Dekorasi */
-        .bg-blob {
-            position: absolute;
-            z-index: 0;
-            filter: blur(100px);
-            opacity: 0.4;
+        /* Input Form Focus */
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
         }
     </style>
 </head>
-<body class="antialiased min-h-screen relative overflow-x-hidden">
+<body class="relative overflow-x-hidden min-h-screen flex flex-col">
 
-    <!-- Ornamen Latar Belakang (Blobs) -->
-    <div class="bg-blob w-[500px] h-[500px] bg-teal-200 rounded-full -top-48 -left-24"></div>
-    <div class="bg-blob w-[400px] h-[400px] bg-emerald-100 rounded-full top-1/2 -right-24"></div>
-
-    <main class="relative z-10 pb-20">
-        
-        <!-- ================= STOREFRONT VIEW ================= -->
-        <div id="storefront-view" class="w-full">
+    <!-- Navbar Premium -->
+    <nav class="fixed top-0 inset-x-0 z-50 transition-all duration-300 backdrop-blur-md bg-white/70 border-b border-white/40 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-emerald-400 flex items-center justify-center text-white shadow-lg shadow-brand-500/30">
+                    <i class="fa-solid fa-heart-pulse text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold text-slate-800 tracking-tight leading-none">WeCare</h1>
+                    <span class="text-[10px] font-bold text-brand-600 uppercase tracking-widest">Digital Health</span>
+                </div>
+            </div>
             
-            <!-- Hero Section -->
-            <section class="relative pt-24 pb-48 bg-gradient-to-br from-[#0f766e] to-slate-900 overflow-hidden">
-                
-                <!-- Efek Cahaya Artistik (Decorative glow) -->
-                <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#2dd4bf]/20 rounded-full blur-[100px] pointer-events-none"></div>
-                
-                <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-                    <!-- Glassmorphism Container Inside Hero -->
-                    <div class="glass-panel p-10 md:p-14 bg-white/10 border-white/20 backdrop-blur-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] transform transition hover:scale-[1.01] duration-500 rounded-[2rem]">
-                        <div class="inline-block px-5 py-2.5 rounded-full bg-white/20 border border-white/30 text-white text-xs md:text-sm font-bold mb-6 backdrop-blur-md shadow-lg">
-                            <i class="fa-solid fa-leaf text-emerald-300 mr-2"></i> Ekosistem Kesehatan Digital
-                        </div>
-                        <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-2xl mb-6">
-                            HiCare apps <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-emerald-200">Pesan Pengingat Untuk Masyarakat Hidup Sehat.</span>
-                        </h1>
-                        <p class="text-lg md:text-xl text-teal-50 max-w-2xl mx-auto drop-shadow-lg mb-10 leading-relaxed">
-                            Memudahkan dalam pengiriman pesan informasi, edukasi dan pengingat pasien untuk kontrol. 
-                            Dengan cara yang mudah dan sangat membantu dalam pengiriman pasan masal.
-                        </p>
-                        <div class="flex justify-center gap-4">
-                            <a href="#paket" class="px-8 py-4 bg-white text-teal-900 rounded-2xl font-extrabold text-lg shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] hover:bg-slate-100 transition transform hover:-translate-y-1">
-                                Mulai Sekarang
-                            </a>
-                        </div>
-                    </div>
+            <!-- Menu Action Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="https://dasboard-hi-care.vercel.app/" class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 bg-white/80 text-slate-700 font-bold text-sm hover:bg-white hover:text-brand-600 hover:border-brand-400 transition shadow-sm">
+                    <i class="fa-solid fa-arrow-right-to-bracket text-brand-500"></i> Login
+                </a>
+                <a href="#paket" class="hidden sm:flex items-center gap-2 px-6 py-2.5 bg-slate-900 text-white rounded-full font-bold text-sm hover:bg-accent-500 transition shadow-lg shadow-slate-900/20">
+                    Lihat Paket
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow relative z-10 pt-20">
+        
+        <!-- Hero Section -->
+        <section class="relative pt-20 pb-40 bg-gradient-to-br from-brand-700 via-brand-600 to-slate-900 overflow-hidden">
+            
+            <!-- Ornamen Cahaya Belakang -->
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-400/20 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/4"></div>
+            
+            <div class="relative z-10 max-w-4xl mx-auto px-6 text-center mt-10">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold mb-8 backdrop-blur-md">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Sistem Pesan & Pengingat Pasien Terpadu
                 </div>
-
-                <!-- Translasi Y agar ombak menyatu tanpa batas -->
-                <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-0 translate-y-[2px]">
-                    <svg viewBox="0 0 1440 320" class="block w-full h-[150px] md:h-[250px]" preserveAspectRatio="none">
-                        <!-- Layer 1 S-Wave (Bayangan Kaca Transparan) -->
-                        <path fill="#F3F4F6" fill-opacity="0.5" d="M0,160 C400,400 1000,-50 1440,160 L1440,320 L0,320 Z"></path>
-                        <!-- Layer 2 S-Wave (Solid Light Grey yang menyatu dengan Body) -->
-                        <path fill="#F3F4F6" d="M0,200 C400,350 1000,0 1440,160 L1440,320 L0,320 Z"></path>
-                    </svg>
-                </div>
-            </section>
-
-            <div class="max-w-6xl mx-auto px-6 mt-16">
-                <!-- Pricing Grid -->
-                <section id="paket" class="space-y-12">
-                    <div class="text-center">
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-500 pb-2">Pilih Paket Langganan</h2>
-                        <p class="text-slate-500 mt-2 text-lg">Disesuaikan untuk kebutuhan jangka panjang Anda</p>
-                    </div>
-
-                    <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <!-- JavaScript akan menyuntikkan kartu paket di sini -->
-                    </div>
-                </section>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-6 drop-shadow-lg">
+                    HiCare Apps <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-emerald-200">Hipertensi Care Message.</span>
+                </h1>
+                
+                <p class="text-lg text-teal-50/90 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+                    Solusi modern untuk memudahkan pengiriman pesan edukasi, informasi, dan pengingat kontrol pasien secara massal. Praktis, efisien, dan profesional.
+                </p>
             </div>
 
-        </div>
+            <!-- Ombak S-Wave Bawah (Transisi Sempurna ke Light Grey) -->
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-0 translate-y-[2px]">
+                <svg viewBox="0 0 1440 320" class="block w-full h-[120px] md:h-[200px]" preserveAspectRatio="none">
+                    <path fill="#F4F6F8" d="M0,224 C320,100 800,320 1440,160 L1440,320 L0,320 Z"></path>
+                </svg>
+            </div>
+        </section>
 
+        <!-- Pricing Section -->
+        <section id="paket" class="max-w-6xl mx-auto px-6 -mt-10 relative z-20 pb-24">
+            
+            <div class="text-center mb-16">
+                <!-- Teks Gradient Besar Sesuai Permintaan -->
+                <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-emerald-500 pb-2">
+                    Pilih Paket Langganan
+                </h2>
+                <p class="text-slate-500 mt-3 font-medium">Karena Kita Perduli. Investasi cerdas untuk efisiensi fasilitas kesehatan Anda.</p>
+            </div>
+
+            <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Data akan disuntikkan oleh JavaScript -->
+            </div>
+            
+            <!-- Trust Badges -->
+            <div class="mt-20 pt-10 border-t border-slate-200/60 flex flex-col items-center">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Telah Dipercaya Oleh</p>
+                <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 grayscale">
+                    <div class="flex items-center gap-2 font-bold text-xl"><i class="fa-solid fa-hospital text-2xl"></i> Klinik Utama</div>
+                    <div class="flex items-center gap-2 font-bold text-xl"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas</div>
+                    <div class="flex items-center gap-2 font-bold text-xl"><i class="fa-solid fa-stethoscope text-2xl"></i> Praktek Mandiri</div>
+                </div>
+            </div>
+
+        </section>
     </main>
 
-    <!-- Checkout Modal -->
-    <div id="checkout-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm">
-        <div class="glass-panel max-w-md w-full p-8 relative overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar">
-            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 bg-white/50 w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div id="checkout-content" class="space-y-6">
-                <h3 class="text-xl font-bold text-slate-900 text-center">Konfirmasi Langganan</h3>
-                
-                <!-- QRIS Section -->
-                <div class="text-center bg-white/60 p-5 rounded-2xl border border-white/80 shadow-sm">
-                    <p class="text-sm font-bold text-slate-800 mb-3">Scan QRIS untuk Membayar</p>
-                    <div class="inline-block p-2 bg-white rounded-xl shadow-md border border-slate-200">
-                        <img id="qris-image-preview" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=HiCare_QRIS" alt="QR Code QRIS" class="w-36 h-36 object-cover mx-auto opacity-90" onerror="this.onerror=null; this.src='https://placehold.co/200x200/ffffff/000000?text=QR+Code+Error';">
-                    </div>
-                </div>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-10 mt-auto">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-heart-pulse text-brand-500 text-xl"></i>
+                <span class="font-bold text-slate-800">WeCare Digital Health &copy; 2026</span>
+            </div>
+            <p class="text-sm text-slate-500 font-medium">Solusi Teknologi Kesehatan Indonesia</p>
+        </div>
+    </footer>
 
-                <div id="order-summary" class="p-4 bg-white/40 rounded-xl border border-white/60 space-y-1 text-center">
-                    <!-- JS Summary Injected Here -->
-                </div>
-
-                <div class="space-y-4">
-                    <input type="text" id="buyer-name" placeholder="Nama Lengkap" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-600 focus:outline-none bg-white/50 text-slate-800 font-medium placeholder-slate-400 transition" required>
-                    <input type="text" id="buyer-puskesmas" placeholder="Nama Puskesmas" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-600 focus:outline-none bg-white/50 text-slate-800 font-medium placeholder-slate-400 transition" required>
-                </div>
-                
-                <button onclick="simulatePayment()" class="w-full flex items-center justify-center gap-2 py-4 bg-brand-600 text-white rounded-2xl font-bold shadow-xl hover:bg-brand-700 transition">
-                    <i class="fa-brands fa-whatsapp text-xl"></i> Konfrimasi Pembayaran
+    <!-- Checkout Modal (Professional UI) -->
+    <div id="checkout-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl w-full max-w-lg shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[95vh] relative">
+            
+            <!-- Modal Header -->
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center relative">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-check text-emerald-500"></i> Checkout Aman
+                </h3>
+                <button onclick="closeCheckoutModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-200 text-slate-500 hover:bg-red-100 hover:text-red-500 transition">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
+                
+                <!-- Package Summary -->
+                <div id="order-summary" class="bg-brand-50 border border-brand-100 rounded-2xl p-4 text-center">
+                    <!-- JS Injected -->
+                </div>
+
+                <!-- QRIS Display Box -->
+                <div class="border-2 border-dashed border-slate-200 rounded-2xl p-6 text-center relative bg-white">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-white px-3 text-xs font-bold text-slate-400">Scan QRIS</div>
+                    <img id="qris-image-preview" src="" alt="QR Code QRIS" class="w-48 h-48 object-contain mx-auto rounded-xl shadow-sm border border-slate-100" onerror="this.src='https://placehold.co/400x400/ffffff/0f766e?text=QR+Error+Tampil'">
+                    <p class="text-[11px] text-slate-400 mt-4"><i class="fa-solid fa-info-circle"></i> Mendukung semua aplikasi E-Wallet & M-Banking</p>
+                </div>
+
+                <!-- User Details Form -->
+                <div class="space-y-4">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase ml-1">Nama Lengkap PIC</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="buyer-name" placeholder="Contoh: Dr. Budi Santoso" class="input-field w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 font-medium placeholder-slate-400 focus:outline-none focus:border-accent-500 focus:bg-white" required>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase ml-1">Nama Instansi / Puskesmas</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-building-user absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="buyer-puskesmas" placeholder="Contoh: Puskesmas Melati" class="input-field w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 font-medium placeholder-slate-400 focus:outline-none focus:border-accent-500 focus:bg-white" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-6 bg-white border-t border-slate-100">
+                <button onclick="simulatePayment()" class="w-full flex items-center justify-center gap-2 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-accent-500 transition-colors shadow-lg group">
+                    <i class="fa-brands fa-whatsapp text-xl text-emerald-400 group-hover:text-white transition-colors"></i> 
+                    Konfirmasi Pembayaran via WhatsApp
+                </button>
+            </div>
+            
         </div>
     </div>
 
     <script>
-        // DATABASE PERMANEN (HARDCODED)
-        // Silakan edit Harga, Fitur, Nama Paket, dan Link URL Gambar QRIS Anda langsung di sini
+        // ==========================================
+        // DATABASE HARDCODED (Permanen di dalam kode)
+        // ==========================================
         const database = [
             { 
                 id: "wc-01", 
-                name: "Basic", 
+                name: "Basic Care", 
                 duration: "1", 
                 price: "50000", 
                 discount: "0", 
-                features: "Akses 1 Bulan, Pesan Unlimited, Layanan", 
-                qris_url: "https://github.com/rzcll/HiCare/blob/main/50.jpeg?raw=true" // Ganti Link Ini dengan link gambar Anda
+                features: "Akses 1 Bulan, Unlimited Messages/Day, Basic Support Email, Template Standar", 
+                // GANTI LINK DI BAWAH INI DENGAN LINK QRIS ASLI ANDA (contoh dari postimages.org berakhiran .jpg/.png)
+                qris_url: "https://placehold.co/400x400/ffffff/ea580c?text=QRIS+Paket+1+Bulan"
             },
             { 
                 id: "wc-02", 
-                name: "Standard", 
+                name: "Standard Care", 
                 duration: "3", 
                 price: "150000", 
                 discount: "10", 
-                features: "Akses 3 Bulan, Pesan Unlimited, Layanan Cepat", 
-                qris_url: "https://github.com/rzcll/HiCare/blob/main/135.jpeg?raw=true" // Ganti Link Ini dengan link gambar Anda
+                features: "Akses 3 Bulan, Unlimited Messages/Day, Priority Support, Kustomisasi Pesan", 
+                qris_url: "https://placehold.co/400x400/ffffff/ea580c?text=QRIS+Paket+3+Bulan"
             },
             { 
                 id: "wc-03", 
-                name: "Premium", 
+                name: "Premium Care", 
                 duration: "6", 
                 price: "300000", 
-                discount: "10", 
-                features: "Akses 6 Bulan, Pesan Unlimited, Layanan Prioritas, Apliaksi Filter", 
-                qris_url: "https://github.com/rzcll/HiCare/blob/main/270.jpeg?raw=true" // Ganti Link Ini dengan link gambar Anda
+                discount: "15", 
+                features: "Akses 6 Bulan, Garansi Sistem, VIP Support WA, Broadcast Massal", 
+                qris_url: "https://placehold.co/400x400/ffffff/ea580c?text=QRIS+Paket+6+Bulan"
             },
             { 
                 id: "wc-04", 
-                name: "Ultimate", 
+                name: "Ultimate Care", 
                 duration: "12", 
                 price: "600000", 
-                discount: "15", 
-                features: "Akses 12 Bulan, Pesan Unlimited, Layanan Prioritas, Apliaksi Filter, Grup Whatsapp, Garansi", 
-                qris_url: "https://github.com/rzcll/HiCare/blob/main/510.jpeg?raw=true" // Ganti Link Ini dengan link gambar Anda
+                discount: "20", 
+                features: "Akses 12 Bulan, Bebas Kendala, VVIP Support 24/7, Fitur Filter Otomatis", 
+                qris_url: "https://placehold.co/400x400/ffffff/ea580c?text=QRIS+Paket+12+Bulan"
             }
         ];
 
@@ -223,26 +297,51 @@
             grid.innerHTML = '';
             
             database.forEach(item => {
+                // Kalkulasi harga setelah diskon
                 const finalPrice = Math.floor(item.price * (1 - (item.discount/100)));
                 const features = item.features.split(',').map(f => f.trim());
                 
+                // Class "group" digunakan agar efek hover (orange) merata ke elemen anak di dalamnya
                 grid.innerHTML += `
-                    <div class="glass-card group p-8 rounded-3xl flex flex-col h-full cursor-pointer">
-                        <div class="mb-6">
-                            <span class="text-xs font-bold text-brand-600 bg-teal-50 px-3 py-1 rounded-full group-hover:bg-orange-100 group-hover:text-orange-600 transition-colors">${item.duration} Bulan</span>
-                            <h3 class="text-2xl font-extrabold mt-3 group-hover:text-orange-600 transition-colors">${item.name}</h3>
+                    <div class="glass-card group p-8 rounded-3xl flex flex-col h-full cursor-pointer relative overflow-hidden">
+                        
+                        <!-- Aksen dekoratif di pojok saat hover -->
+                        <div class="absolute -top-10 -right-10 w-24 h-24 bg-accent-500/10 rounded-full blur-xl group-hover:bg-accent-500/30 transition-all duration-500"></div>
+
+                        <div class="mb-6 relative z-10">
+                            <span class="text-[11px] font-bold text-brand-600 bg-brand-50 px-3 py-1.5 rounded-full group-hover:bg-accent-50 group-hover:text-accent-600 transition-colors border border-brand-100 group-hover:border-accent-200 uppercase tracking-wide">
+                                ${item.duration} Bulan
+                            </span>
+                            <h3 class="text-2xl font-extrabold mt-4 text-slate-800 group-hover:text-accent-600 transition-colors">
+                                ${item.name}
+                            </h3>
                         </div>
-                        <div class="mb-8">
+                        
+                        <div class="mb-6 relative z-10 border-b border-slate-200/50 pb-6 group-hover:border-accent-200 transition-colors">
                             <div class="flex items-baseline gap-1">
-                                <span class="text-3xl font-black group-hover:text-orange-500 transition-colors">Rp${finalPrice.toLocaleString('id-ID')}</span>
+                                <span class="text-3xl font-black text-slate-900 group-hover:text-accent-500 transition-colors">
+                                    Rp${finalPrice.toLocaleString('id-ID')}
+                                </span>
                             </div>
-                            ${item.discount > 0 ? `<p class="text-xs text-red-500 font-bold mt-1">Hemat ${item.discount}% (Asli: Rp${parseInt(item.price).toLocaleString('id-ID')})</p>` : ''}
+                            ${item.discount > 0 ? `
+                                <p class="text-xs text-slate-400 font-semibold mt-1 line-through decoration-red-500/50">
+                                    Rp${parseInt(item.price).toLocaleString('id-ID')} 
+                                </p>
+                                <span class="inline-block mt-1 text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded font-bold">Hemat ${item.discount}%</span>
+                            ` : ''}
                         </div>
-                        <ul class="flex-grow space-y-3 mb-8">
-                            ${features.map(f => `<li class="text-xs text-slate-500 flex items-start gap-2"><i class="fa-solid fa-check text-brand-600 group-hover:text-orange-500 mt-0.5 transition-colors"></i>${f}</li>`).join('')}
+                        
+                        <ul class="flex-grow space-y-3.5 mb-8 relative z-10">
+                            ${features.map(f => `
+                                <li class="text-sm text-slate-600 flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-brand-500 group-hover:text-accent-500 mt-0.5 text-base transition-colors"></i>
+                                    <span class="leading-snug">${f}</span>
+                                </li>
+                            `).join('')}
                         </ul>
-                        <button onclick="openCheckout('${item.id}')" class="w-full py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-orange-600 group-hover:bg-orange-500 transition-all shadow-lg group-hover:shadow-orange-500/30">
-                            Pilih Paket
+                        
+                        <button onclick="openCheckout('${item.id}')" class="w-full py-3.5 bg-slate-900 text-white rounded-xl font-bold text-sm hover:bg-accent-600 group-hover:bg-accent-500 transition-all shadow-md group-hover:shadow-accent-500/30 relative z-10">
+                            Pilih Paket Ini
                         </button>
                     </div>
                 `;
@@ -254,13 +353,17 @@
             currentSelectedPackage = item; 
             const price = Math.floor(item.price * (1 - (item.discount/100)));
             
-            // Setel Gambar QRIS sesuai paket
+            // Tampilkan Link Gambar QRIS dari Database
             const qrisPreview = document.getElementById('qris-image-preview');
-            qrisPreview.src = item.qris_url || 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=QRIS_Not_Found';
+            qrisPreview.src = item.qris_url;
             
             document.getElementById('order-summary').innerHTML = `
-                <p class="text-base font-bold text-brand-600">${item.name}</p>
-                <p class="text-sm text-slate-500 font-medium">Paket ${item.duration} Bulan &bull; Rp${price.toLocaleString('id-ID')}</p>
+                <h4 class="text-lg font-bold text-brand-700 mb-1">${item.name}</h4>
+                <div class="flex justify-center items-center gap-2 text-sm text-brand-600 font-semibold">
+                    <span>${item.duration} Bulan</span>
+                    <i class="fa-solid fa-circle text-[4px]"></i>
+                    <span>Rp${price.toLocaleString('id-ID')}</span>
+                </div>
             `;
             
             document.getElementById('checkout-modal').classList.remove('hidden');
@@ -277,26 +380,25 @@
             const puskesmas = document.getElementById('buyer-puskesmas').value.trim();
 
             if(!name || !puskesmas) {
-                return alert("Mohon lengkapi Nama Lengkap dan Nama Puskesmas Anda terlebih dahulu.");
+                return alert("Mohon lengkapi Nama Lengkap PIC dan Nama Instansi Anda.");
             }
 
             if(!currentSelectedPackage) {
-                return alert("Terjadi kesalahan, silakan pilih paket kembali.");
+                return alert("Terjadi kesalahan, silakan refresh halaman.");
             }
 
-            // Membangun format pesan WhatsApp
+            // Pesan WA Sesuai Format
             const message = `saya ${name} dari puskesmas ${puskesmas} akan melakukan transaksi paket ${currentSelectedPackage.duration} bulan`;
             const encodedMessage = encodeURIComponent(message);
             
-            // Link WhatsApp (Otomatis membuka obrolan ke nomor +6281334392434)
+            // Buka WhatsApp
             const whatsappUrl = `https://wa.me/6281334392434?text=${encodedMessage}`;
-            
-            // Buka WhatsApp dan tutup pop-up
             window.open(whatsappUrl, '_blank');
+            
             closeCheckoutModal();
         }
 
-        // Render tampilan pertama kali saat halaman dimuat
+        // Inisialisasi awal
         renderStorefront();
     </script>
 </body>
