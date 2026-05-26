@@ -184,9 +184,12 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-10 mt-auto">
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-heart-pulse text-brand-500 text-xl"></i>
-                <span class="font-bold text-slate-800">HiCare Smart Rminder &copy; 2026</span>
+            <div class="flex items-center gap-3">
+                <!-- LOGO FOOTER YANG DIUBAH -->
+                <div class="w-8 h-8 flex items-center justify-center overflow-hidden">
+                    <img src="https://github.com/rzcll/HiCare/blob/main/Logo.png?raw=true" alt="Logo HiCare Footer" class="w-full h-full object-contain">
+                </div>
+                <span class="font-bold text-slate-800">HiCare Smart Reminder &copy; 2026</span>
             </div>
             <p class="text-sm text-slate-500 font-medium">Solusi Teknologi Kesehatan Indonesia</p>
         </div>
@@ -406,5 +409,14 @@
         // Inisialisasi awal
         renderStorefront();
     </script>
+
+    <!-- Tombol WhatsApp Mengambang (Floating Button) -->
+    <a href="https://wa.me/6281334392434?text=Halo%20Admin%20HiCare,%20saya%20ingin%20bertanya%20mengenai%20layanan%20pengingat%20pasien." target="_blank" class="fixed bottom-6 right-6 z-[90] w-14 h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center text-3xl shadow-[0_10px_20px_rgba(16,185,129,0.4)] hover:bg-emerald-600 hover:scale-110 transition-all duration-300 group">
+        <i class="fa-brands fa-whatsapp"></i>
+        <!-- Kotak Teks Pop-up saat kursor diarahkan -->
+        <span class="absolute right-16 top-1/2 transform -translate-y-1/2 bg-white text-slate-700 text-xs font-bold px-3 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none border border-slate-100">
+            Ada Pertanyaan?
+        </span>
+    </a>
 </body>
 </html>
