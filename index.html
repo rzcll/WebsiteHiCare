@@ -161,8 +161,8 @@
         <nav class="fixed top-0 inset-x-0 z-50 transition-all duration-300 backdrop-blur-md bg-white/70 border-b border-white/40 shadow-sm">
             <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 flex items-center justify-center overflow-hidden bg-white shadow-md shadow-brand-500/20 border border-slate-100 rounded-xl">
-                        <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/LOGO%20HiCare.png?raw=true" class="w-full h-full object-contain p-1" alt="Logo">
+                    <div class="w-20 h-20 flex items-center justify-center hover:scale-125 transition-transform duration-300 cursor-default">
+                        <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/LOGO%20HiCare.png?raw=true" class="w-full h-full object-contain drop-shadow-md" alt="Logo">
                     </div>
                     <div>
                         <h1 class="text-xl font-extrabold text-slate-800 tracking-tight leading-none">HiCare</h1>
@@ -172,8 +172,8 @@
                 
                 <!-- Menu Action Buttons -->
                 <div class="flex items-center gap-3">
-                    <button onclick="showAppLogin()" class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 bg-white/80 text-slate-700 font-bold text-sm hover:bg-white hover:text-brand-600 hover:border-brand-400 transition shadow-sm">
-                        <i class="fa-solid fa-arrow-right-to-bracket text-brand-500"></i> Login
+                    <button onclick="showAppLogin()" class="group flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 bg-white/80 text-slate-700 font-bold text-sm hover:bg-green-500 hover:text-white hover:border-green-500 transition-all duration-300 shadow-sm">
+                        <i class="fa-solid fa-arrow-right-to-bracket text-brand-500 group-hover:text-white transition-colors duration-300"></i> Login
                     </button>
                     <a href="#paket" class="hidden sm:flex items-center gap-2 px-6 py-2.5 bg-slate-900 text-white rounded-full font-bold text-sm hover:bg-accent-500 transition shadow-lg shadow-slate-900/20">
                         Lihat Paket
@@ -288,8 +288,8 @@
         <footer class="bg-white border-t border-slate-200 py-10 mt-auto">
             <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/LOGO%20HiCare.png?raw=true" alt="Logo HiCare Footer" class="w-full h-full object-contain">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/LOGO%20HiCare.png?raw=true" alt="Logo HiCare Footer" class="w-full h-full object-contain drop-shadow-sm">
                     </div>
                     <span class="font-bold text-slate-800">HiCare Smart Reminder &copy; 2026</span>
                 </div>
@@ -367,15 +367,19 @@
             <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-500 uppercase ml-1">Pilih Durasi Paket PRO</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-calendar-days absolute left-4 top-1/2 transform -translate-y-1/2 text-accent-500"></i>
-                        <select id="pro-duration-select" onchange="updateProSelection()" class="w-full pl-11 pr-10 py-3.5 rounded-xl border-2 border-accent-200 bg-accent-50/30 text-slate-800 font-bold focus:outline-none focus:border-accent-500 appearance-none cursor-pointer hover:bg-accent-50/50 transition">
-                            <option value="1">1 Bulan (Rp 70.000)</option>
-                            <option value="3">3 Bulan (Rp 195.000)</option>
-                            <option value="6">6 Bulan (Rp 390.000)</option>
-                            <option value="12">12 Bulan (Rp 750.000)</option>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-calendar-days text-accent-500 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <select id="pro-duration-select" onchange="updateProSelection()" class="w-full pl-11 pr-10 py-4 rounded-xl border-2 border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50 text-orange-900 font-extrabold text-sm focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 appearance-none cursor-pointer hover:border-orange-400 hover:shadow-md transition-all duration-300">
+                            <option value="1" class="font-bold text-slate-800 bg-white">1 Bulan (Rp 70.000)</option>
+                            <option value="3" class="font-bold text-slate-800 bg-white">3 Bulan (Rp 195.000)</option>
+                            <option value="6" class="font-bold text-slate-800 bg-white">6 Bulan (Rp 390.000)</option>
+                            <option value="12" class="font-bold text-slate-800 bg-white">12 Bulan (Rp 750.000)</option>
                         </select>
-                        <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-chevron-down text-orange-500 font-bold group-hover:translate-y-0.5 transition-transform duration-300"></i>
+                        </div>
                     </div>
                     <p class="text-[10px] text-slate-400 ml-1 mt-1">*Harga sudah termasuk paket dasar + fitur PRO (Rp 20.000/bln)</p>
                 </div>
@@ -419,8 +423,8 @@
         </button>
         <div class="dark-shadow-card p-10 w-full max-w-md animate-slide-up">
             <div class="text-center mb-10">
-                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gray-50 shadow-inner border border-gray-200 mb-5 p-3">
-                    <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/LOGO%20HiCare.png?raw=true" alt="Logo" class="w-full h-full object-contain drop-shadow-sm">
+                <div class="inline-flex items-center justify-center w-40 h-40 mb-2 hover:scale-125 transition-transform duration-300 cursor-default">
+                    <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/LOGO%20HiCare.png?raw=true" alt="Logo" class="w-full h-full object-contain drop-shadow-md">
                 </div>
                 <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Login HiCare</h2>
                 <p class="text-gray-500 text-sm mt-2 font-medium">Sistem Filter & Template WA Blaster.</p>
@@ -450,8 +454,8 @@
                     <i class="ph ph-warning-circle text-lg"></i> <span id="loginErrorText"></span>
                 </div>
                 
-                <button id="loginBtn" class="w-full py-3.5 rounded-xl font-bold dark-shadow-btn mt-4 flex justify-center items-center gap-2 text-sm tracking-wide">
-                    Masuk ke Sistem <i class="ph ph-arrow-right font-bold"></i>
+                <button id="loginBtn" class="group w-full py-3.5 rounded-xl font-bold bg-gray-800 text-white hover:bg-green-500 hover:text-white hover:shadow-[0_10px_20px_-5px_rgba(34,197,94,0.5)] transition-all duration-300 mt-4 flex justify-center items-center gap-2 text-sm tracking-wide shadow-[0_10px_20px_-5px_rgba(0,0,0,0.4)]">
+                    Masuk ke Sistem <i class="ph ph-arrow-right font-bold group-hover:translate-x-1 transition-transform duration-300"></i>
                 </button>
             </div>
         </div>
@@ -465,8 +469,8 @@
         <!-- Header Top Bar -->
         <div class="dark-shadow-card flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 animate-slide-up p-5 md:px-6">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-xl bg-gray-50 shadow-inner border border-gray-200 p-2 shrink-0">
-                    <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/LOGO%20HiCare.png?raw=true" alt="Logo" class="w-full h-full object-contain">
+                <div class="w-28 h-28 flex items-center justify-center shrink-0 hover:scale-125 transition-transform duration-300 cursor-default">
+                    <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/LOGO%20HiCare.png?raw=true" alt="Logo" class="w-full h-full object-contain drop-shadow-md">
                 </div>
                 <div>
                     <h1 class="text-xl md:text-2xl font-extrabold text-gray-900 tracking-tight leading-none">
