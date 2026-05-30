@@ -149,6 +149,26 @@
         .animate-slide-up {
             animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        /* Animasi Marquee (Berjalan Kanan ke Kiri) */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 50s linear infinite;
+        }
+        /* Menghentikan laju saat kursor diarahkan ke logo */
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+        /* Membuat efek pudar di pinggir layar agar muncul/hilang lebih estetik */
+        .marquee-container {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
     </style>
 </head>
 <body class="relative overflow-x-hidden min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
@@ -275,10 +295,44 @@
                 <!-- Trust Badges -->
                 <div class="mt-20 pt-10 border-t border-slate-200/60 flex flex-col items-center">
                     <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Sudah Di Gunakan Oleh</p>
-                    <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 grayscale">
-                        <div class="flex items-center gap-2 font-bold text-xl"><i class="fa-solid fa-hospital text-2xl"></i> Klinik Utama</div>
-                        <div class="flex items-center gap-2 font-bold text-xl"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas</div>
-                        <div class="flex items-center gap-2 font-bold text-xl"><i class="fa-solid fa-stethoscope text-2xl"></i> Praktek Mandiri</div>
+                    
+                    <!-- Wadah Marquee -->
+                    <div class="w-full max-w-5xl overflow-hidden relative marquee-container opacity-60 grayscale cursor-default">
+                        <!-- Track Animasi -->
+                        <div class="animate-marquee flex items-center gap-12 md:gap-24">
+                            <!-- SET 1 (Asli) -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-hospital text-2xl"></i> Klinik Utama</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Praktek Mandiri</div>
+                            
+                            <!-- TAMBAH DAFTAR BARU DI SINI (Set 1) -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Dinoyo</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Bareng</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Kendalkerep</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Janti</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Gribik</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Poncokusumo</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Perawat Praktek Mandiri</div>
+
+                            <!-- SET 2 (Duplikat dari Set 1 untuk putaran yang mulus) -->
+                            <!-- PENTING: Set 2 harus SAMA PERSIS isinya dengan Set 1 -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Dinoyo</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Bareng</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Kendalkerep</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Janti</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Gribik</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Poncokusumo</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Perawat Praktek Mandiri</div>
+                            
+                            <!-- TAMBAH DAFTAR BARU DI SINI JUGA (Set 2) -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Dinoyo</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Bareng</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Kendalkerep</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Janti</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Gribik</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Poncokusumo</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Perawat Praktek Mandiri</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -421,6 +475,12 @@
         <button onclick="showLandingPage()" class="absolute top-6 left-6 flex items-center gap-2 text-gray-500 hover:text-brand-600 font-bold transition-colors z-20">
             <i class="ph ph-arrow-left text-xl"></i> Kembali ke Beranda
         </button>
+
+        <!-- Tombol Gerigi Control Panel -->
+        <a href="https://hicare-control.vercel.app/" target="_blank" class="absolute bottom-6 right-6 flex items-center justify-center w-12 h-12 text-gray-400 hover:text-gray-700 hover:rotate-90 transition-all duration-500 z-20" title="Control Panel">
+            <i class="fa-solid fa-gear text-3xl"></i>
+        </a>
+
         <div class="dark-shadow-card p-10 w-full max-w-md animate-slide-up">
             <div class="text-center mb-10">
                 <div class="inline-flex items-center justify-center w-40 h-40 mb-2 hover:scale-125 transition-transform duration-300 cursor-default">
