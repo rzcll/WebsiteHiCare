@@ -14,6 +14,9 @@
     <!-- Pustaka Tambahan untuk Aplikasi -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -296,43 +299,57 @@
                 <div class="mt-20 pt-10 border-t border-slate-200/60 flex flex-col items-center">
                     <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Sudah Di Gunakan Oleh</p>
                     
-                    <!-- Wadah Marquee -->
-                    <div class="w-full max-w-5xl overflow-hidden relative marquee-container opacity-60 grayscale cursor-default">
-                        <!-- Track Animasi -->
+                    <!-- Wadah Marquee (3 Baris) -->
+                    <div class="w-full max-w-5xl overflow-hidden relative marquee-container opacity-60 grayscale cursor-default flex flex-col gap-6 md:gap-8">
+                        
+                        <!-- Baris 1: Bergerak ke Kiri -->
                         <div class="animate-marquee flex items-center gap-12 md:gap-24">
-                            <!-- SET 1 (Asli) -->
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-hospital text-2xl"></i> Klinik Utama</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas</div>
+                            <!-- Set 1 -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-hospital text-2xl"></i> Klinik</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Dinoyo</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Praktek Perawat</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Bareng</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Kendalkerep</div>
+                            <!-- Set 2 (Duplikat) -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-hospital text-2xl"></i> Klinik</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Dinoyo</div>
                             <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Praktek Mandiri</div>
-                            
-                            <!-- TAMBAH DAFTAR BARU DI SINI (Set 1) -->
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Dinoyo</div>
                             <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Bareng</div>
                             <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Kendalkerep</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Janti</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Gribik</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Poncokusumo</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Perawat Praktek Mandiri</div>
-
-                            <!-- SET 2 (Duplikat dari Set 1 untuk putaran yang mulus) -->
-                            <!-- PENTING: Set 2 harus SAMA PERSIS isinya dengan Set 1 -->
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Dinoyo</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Bareng</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Kendalkerep</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Janti</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Gribik</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Poncokusumo</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Perawat Praktek Mandiri</div>
-                            
-                            <!-- TAMBAH DAFTAR BARU DI SINI JUGA (Set 2) -->
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Dinoyo</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Bareng</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Kendalkerep</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Janti</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Gribik</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Poncokusumo</div>
-                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Perawat Praktek Mandiri</div>
                         </div>
+
+                        <!-- Baris 2: Bergerak ke Kanan (Reverse) -->
+                        <div class="animate-marquee flex items-center gap-12 md:gap-24" style="animation-direction: reverse; animation-duration: 45s;">
+                            <!-- Set 1 -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Janti</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Gribik</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-hospital text-2xl"></i> Klinik Sehat</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Poncokusumo</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Bidan Praktek</div>
+                            <!-- Set 2 (Duplikat) -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Janti</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Gribik</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-hospital text-2xl"></i> Klinik Sehat</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Poncokusumo</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Bidan Praktek</div>
+                        </div>
+
+                        <!-- Baris 3: Bergerak ke Kiri dengan kecepatan beda -->
+                        <div class="animate-marquee flex items-center gap-12 md:gap-24" style="animation-duration: 55s;">
+                            <!-- Set 1 -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Perawat Praktek Mandiri</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Melati</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-hospital text-2xl"></i> RS Bersalin</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Mawar</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Praktek Dokter Bersama</div>
+                            <!-- Set 2 (Duplikat) -->
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Perawat Praktek Mandiri</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Melati</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-hospital text-2xl"></i> RS Bersalin</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-house-medical text-2xl"></i> Puskesmas Mawar</div>
+                            <div class="flex items-center gap-2 font-bold text-xl whitespace-nowrap"><i class="fa-solid fa-stethoscope text-2xl"></i> Praktek Dokter Bersama</div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -576,7 +593,7 @@
                 <button onclick="goToPackages()" class="px-5 py-3 bg-orange-500 hover:bg-orange-600 border border-orange-600 text-white rounded-xl text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2 flex-1 sm:flex-none">
                     <i class="ph ph-shopping-cart text-lg"></i> Perpanjang
                 </button>
-                <a id="btnDownload" href="#" target="_blank" class="px-5 py-3 dark-shadow-btn rounded-xl text-sm font-bold flex items-center justify-center gap-2 flex-1 sm:flex-none">
+                <a id="btnDownload" href="https://drive.google.com/drive/folders/1scPFSNXauFBrYnL75Oy68S6U1HEgky-e" target="_blank" class="px-5 py-3 dark-shadow-btn rounded-xl text-sm font-bold flex items-center justify-center gap-2 flex-1 sm:flex-none">
                     <i class="ph ph-download-simple text-lg"></i> Download Aplikasi
                 </a>
             </div>
@@ -696,36 +713,29 @@
         const appSection = document.getElementById('appSection');
 
         function showAppLogin() {
-            // Sembunyikan Landing Page
             landingPage.classList.add('hidden');
             landingPage.classList.remove('flex');
             
-            // Tampilkan Form Login App
             loginSection.classList.remove('hidden');
             loginSection.classList.add('flex');
             loginSection.style.opacity = '1';
             loginSection.style.transform = 'scale(1)';
             
-            // Scroll ke atas
             window.scrollTo(0, 0);
         }
 
         function showLandingPage() {
-            // Sembunyikan App/Login
             loginSection.classList.add('hidden');
             loginSection.classList.remove('flex');
             appSection.classList.add('hidden');
             
-            // Tampilkan kembali Landing Page
             landingPage.classList.remove('hidden');
             landingPage.classList.add('flex');
             
-            // Scroll ke atas
             window.scrollTo(0, 0);
         }
 
         function goToPackages() {
-            // Reset Data Session (seperti fungsi logout tapi langsung ke landing page)
             currentLoggedUser = "";
             if (countdownInterval) clearInterval(countdownInterval);
             document.getElementById('usernameInput').value = "";
@@ -736,16 +746,13 @@
             document.getElementById('templateSection').classList.add('hidden');
             document.getElementById('tableSection').classList.add('hidden');
 
-            // Sembunyikan App & Form Login
             appSection.classList.add('hidden');
             loginSection.classList.add('hidden');
             loginSection.classList.remove('flex');
             
-            // Tampilkan kembali Landing Page
             landingPage.classList.remove('hidden');
             landingPage.classList.add('flex');
 
-            // Scroll otomatis ke bagian Paket secara mulus
             setTimeout(() => {
                 const paketSection = document.getElementById('paket');
                 if(paketSection) {
@@ -758,42 +765,10 @@
         // DATABASE HARDCODED LANDING PAGE
         // ==========================================
         const database = [
-            { 
-                id: "wc-01", 
-                name: "Basic Care", 
-                duration: "1", 
-                price: "50000", 
-                discount: "0", 
-                features: "Akses 1 Bulan, Pesan Unlimited", 
-                qris_url: "https://github.com/rzcll/WebsiteHiCare/blob/main/50.jpeg?raw=true"
-            },
-            { 
-                id: "wc-02", 
-                name: "Standard Care", 
-                duration: "3", 
-                price: "150000", 
-                discount: "10", 
-                features: "Akses 3 Bulan, Pesan Unlimited, Potongan Harga 10%", 
-                qris_url: "https://github.com/rzcll/WebsiteHiCare/blob/main/135.jpeg?raw=true"
-            },
-            { 
-                id: "wc-03", 
-                name: "Premium Care", 
-                duration: "6", 
-                price: "300000", 
-                discount: "10", 
-                features: "Akses 6 Bulan,  Pesan Unlimited, Potongan Harga 10%, Layanan Prioritas", 
-                qris_url: "https://github.com/rzcll/WebsiteHiCare/blob/main/270.jpeg?raw=true"
-            },
-            { 
-                id: "wc-04", 
-                name: "Ultimate Care", 
-                duration: "12", 
-                price: "600000", 
-                discount: "15", 
-                features: "Akses 12 Bulan, Pesan Unlimited, Potongan Harga 15%, Layanan VIP, Garansi Kendala aplikasi", 
-                qris_url: "https://github.com/rzcll/WebsiteHiCare/blob/main/510.jpeg?raw=true"
-            }
+            { id: "wc-01", name: "Basic Care", duration: "1", price: "50000", discount: "0", features: "Akses 1 Bulan, Pesan Unlimited", qris_url: "https://github.com/rzcll/WebsiteHiCare/blob/main/50.jpeg?raw=true" },
+            { id: "wc-02", name: "Standard Care", duration: "3", price: "150000", discount: "10", features: "Akses 3 Bulan, Pesan Unlimited, Potongan Harga 10%", qris_url: "https://github.com/rzcll/WebsiteHiCare/blob/main/135.jpeg?raw=true" },
+            { id: "wc-03", name: "Premium Care", duration: "6", price: "300000", discount: "10", features: "Akses 6 Bulan,  Pesan Unlimited, Potongan Harga 10%, Layanan Prioritas", qris_url: "https://github.com/rzcll/WebsiteHiCare/blob/main/270.jpeg?raw=true" },
+            { id: "wc-04", name: "Ultimate Care", duration: "12", price: "600000", discount: "15", features: "Akses 12 Bulan, Pesan Unlimited, Potongan Harga 15%, Layanan VIP, Garansi Kendala aplikasi", qris_url: "https://github.com/rzcll/WebsiteHiCare/blob/main/510.jpeg?raw=true" }
         ];
 
         const proDatabase = {
@@ -927,9 +902,14 @@
         renderStorefront();
 
         // ==========================================
-        // SCRIPT APLIKASI DASHBOARD (API & EXCEL)
+        // SCRIPT APLIKASI DASHBOARD (SUPABASE & EXCEL)
         // ==========================================
-        const API_URL = "https://script.google.com/macros/s/AKfycbyRMBz6isIqB_q_ftcxGFqISCuY7Vxl9oU4zIePzImLH6X7sfGW57XEmj8wug6auGYB/exec";
+        
+        // KONFIGURASI SUPABASE (GANTI DENGAN KREDENSIAL PROJECT SUPABASE ANDA)
+        const SUPABASE_URL = "https://fxgbfvvbyeoyybywyyyc.supabase.co"; // Ganti ini
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ4Z2JmdnZieWVveXlieXd5eXljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNzAwNjQsImV4cCI6MjA5NTc0NjA2NH0.t4uioQclA8zHqaP2Y2rwpTLhJl4y_ObZK8Fn1B-024s"; // Ganti ini
+        
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         let currentLoggedUser = "";
         let countdownInterval;
@@ -997,12 +977,13 @@
             }, 1000);
         }
 
-        loginBtn.addEventListener('click', function() {
+        // FUNGSI LOGIN MENGGUNAKAN SUPABASE
+        loginBtn.addEventListener('click', async function() {
             const user = document.getElementById('usernameInput').value;
             const pass = document.getElementById('passwordInput').value;
             
             if(!user || !pass) return showLoginError("Username dan password harus diisi!");
-            if(API_URL === "URL_WEB_APP_GOOGLE_SCRIPT_ANDA_DISINI") return showLoginError("Tolong isi API_URL di dalam source code HTML.");
+            if(SUPABASE_URL === "https://YOUR_PROJECT_ID.supabase.co") return showLoginError("Tolong isi URL dan Key Supabase di dalam source code HTML.");
 
             const originalBtnText = loginBtn.innerHTML;
             loginBtn.innerHTML = '<i class="ph ph-spinner animate-spin text-lg"></i> Memverifikasi...';
@@ -1010,21 +991,29 @@
             loginBtn.classList.add('opacity-80');
             loginError.classList.add('hidden');
 
-            fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: "login", username: user, password: pass })
-            })
-            .then(response => response.json())
-            .then(response => {
-                if(response.success) {
+            try {
+                // Fetch user data dari table 'users'
+                const { data, error } = await supabaseClient
+                    .from('users')
+                    .select('*')
+                    .eq('username', user)
+                    .eq('password', pass)
+                    .single(); // Expecting 1 exact match
+
+                if (error || !data) {
+                    showLoginError("Username atau password salah!");
+                } else {
+                    // Login Berhasil
                     currentLoggedUser = user;
                     displayUsername.textContent = user;
-                    if(response.template) messageTemplate.value = response.template;
                     
-                    uiLicenseCode.textContent = response.licenseCode || "-";
-                    btnDownload.href = response.downloadLink || "#";
-                    startCountdown(response.expiryDate);
+                    // Disesuaikan dengan kolom "templatePesan" di DB
+                    if(data.templatePesan) messageTemplate.value = data.templatePesan;
+                    
+                    // Disesuaikan dengan kolom "licenseCode" & "expiryDate"
+                    uiLicenseCode.textContent = data.licenseCode || "-";
+                    btnDownload.href = "https://drive.google.com/drive/folders/1scPFSNXauFBrYnL75Oy68S6U1HEgky-e"; // Diarahkan ke Google Drive
+                    startCountdown(data.expiryDate);
 
                     loginSection.style.opacity = '0';
                     loginSection.style.transform = 'scale(0.95)';
@@ -1033,16 +1022,12 @@
                         loginSection.classList.remove('flex');
                         appSection.classList.remove('hidden');
                     }, 500);
-
-                } else {
-                    showLoginError(response.message);
                 }
+            } catch (err) {
+                showLoginError("Gagal terhubung ke database server.");
+            } finally {
                 resetLoginBtn(originalBtnText);
-            })
-            .catch(err => {
-                showLoginError("Gagal terhubung ke server (Cek URL Web App).");
-                resetLoginBtn(originalBtnText);
-            });
+            }
         });
 
         function showLoginError(msg) {
@@ -1082,38 +1067,37 @@
         const saveTemplateBtn = document.getElementById('saveTemplateBtn');
         const saveOverlay = document.getElementById('saveOverlay');
 
-        saveTemplateBtn.addEventListener('click', function() {
+        // FUNGSI SIMPAN TEMPLATE MENGGUNAKAN SUPABASE
+        saveTemplateBtn.addEventListener('click', async function() {
             const currentTemplate = messageTemplate.value;
             saveOverlay.classList.remove('hidden');
             saveOverlay.classList.add('flex');
 
-            fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: "saveTemplate", username: currentLoggedUser, template: currentTemplate })
-            })
-            .then(res => res.json())
-            .then(res => {
+            try {
+                const { error } = await supabaseClient
+                    .from('users')
+                    .update({ templatePesan: currentTemplate }) // Disesuaikan ke kolom templatePesan
+                    .eq('username', currentLoggedUser);
+
+                if (error) throw error;
+
+                // Jika berhasil
                 saveOverlay.classList.add('hidden');
                 saveOverlay.classList.remove('flex');
                 
-                if(res.success) {
-                    const originalHtml = saveTemplateBtn.innerHTML;
-                    saveTemplateBtn.innerHTML = '<i class="ph ph-check text-lg"></i> Tersimpan';
-                    saveTemplateBtn.classList.add('bg-green-600');
-                    setTimeout(() => {
-                        saveTemplateBtn.innerHTML = originalHtml;
-                        saveTemplateBtn.classList.remove('bg-green-600');
-                    }, 2000);
-                } else {
-                    alert("Gagal menyimpan: " + res.message);
-                }
-            })
-            .catch(err => {
+                const originalHtml = saveTemplateBtn.innerHTML;
+                saveTemplateBtn.innerHTML = '<i class="ph ph-check text-lg"></i> Tersimpan';
+                saveTemplateBtn.classList.add('bg-green-600');
+                setTimeout(() => {
+                    saveTemplateBtn.innerHTML = originalHtml;
+                    saveTemplateBtn.classList.remove('bg-green-600');
+                }, 2000);
+
+            } catch (err) {
                 saveOverlay.classList.add('hidden');
                 saveOverlay.classList.remove('flex');
-                alert("Gagal terhubung ke server.");
-            });
+                alert("Gagal menyimpan ke server: " + err.message);
+            }
         });
 
         const fileInput = document.getElementById('fileInput');
