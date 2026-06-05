@@ -172,9 +172,67 @@
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
+
+        /* Efek Mengambang untuk Watermark Background */
+        @keyframes floatBg {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            33% { transform: translate(30px, -40px) rotate(3deg) scale(1.05); }
+            66% { transform: translate(-30px, 40px) rotate(-3deg) scale(0.95); }
+        }
+        .animate-float-bg {
+            animation: floatBg 25s ease-in-out infinite;
+        }
+
+        /* ==========================================
+           GAYA UNTUK GALERI EFEK HOVER
+           ========================================== */
+        .gallery-hover {
+            width: 95%;
+            max-width: 900px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .gallery-hover img {
+            width: 10%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #fff;
+            transition: width 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-hover img:hover {
+            width: 50%;
+        }
+
+        @media (max-width: 600px) {
+            .gallery-hover {
+                height: 250px;
+                gap: 5px;
+            }
+            .gallery-hover img {
+                border-radius: 8px;
+                border-width: 1px;
+            }
+            .gallery-hover img:hover {
+                width: 70%; 
+            }
+        }
     </style>
 </head>
 <body class="relative overflow-x-hidden min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- Logo Latar Belakang Transparan (Watermark) -->
+    <div class="fixed inset-0 z-0 flex items-center justify-center pointer-events-none select-none opacity-10">
+        <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/LOGO%20HiCare.png?raw=true" alt="Watermark HiCare" class="w-[90vw] md:w-[600px] lg:w-[800px] object-contain animate-float-bg">
+    </div>
 
     <!-- =========================================================================
          WADAH LANDING PAGE 
@@ -216,7 +274,7 @@
                         Sistem Pesan & Pengingat Pasien Terpadu
                     </div>
                     <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-6 drop-shadow-lg">
-                        HiCare Apps <br>
+                        HiCare <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-emerald-200">Hipertensi Care Message.</span>
                     </h1>
                     <p class="text-lg text-teal-50/90 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
@@ -231,7 +289,7 @@
             </section>
 
             <!-- Pricing Section -->
-            <section id="paket" class="max-w-6xl mx-auto px-6 -mt-10 relative z-20 pb-24">
+            <section id="paket" class="max-w-6xl mx-auto px-6 -mt-10 relative z-20 pb-10">
                 <div class="text-center mb-10">
                     <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-emerald-500 pb-2">
                         Pilih Paket Langganan
@@ -321,9 +379,30 @@
                 <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                     <!-- Data disuntikkan oleh JavaScript -->
                 </div>
+            </section>
 
-                <!-- Trust Badges -->
-                <div class="mt-20 pt-10 border-t border-slate-200/60 flex flex-col items-center">
+            <!-- ==========================================
+                 GALERI EFEK HOVER (NEW SECTION)
+                 ========================================== -->
+            <section class="max-w-6xl mx-auto px-6 pb-16 relative z-20">
+                <div class="text-center mb-10 pt-10 border-t border-slate-200/60">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-emerald-500 pb-2">
+                        Galeri HiCare
+                    </h2>
+                    <p class="text-slate-500 mt-2 font-medium">Dokumentasi dan momen penerapan sistem kami di lapangan.</p>
+                </div>
+                
+                <div class="w-full">
+                    <div class="gallery-hover">
+                        <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/IMG_20260525_151736.jpg.jpeg?raw=true" alt="Galeri 1">
+                        <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/IMG_20260525_162617.jpg.jpeg?raw=true" alt="Galeri 2">
+                        <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/IMG_20260604_132054.jpg.jpeg?raw=true" alt="Galeri 3">
+                        <img src="https://github.com/rzcll/WebsiteHiCare/blob/main/IMG_20260604_132148.jpg.jpeg?raw=true" alt="Galeri 4">
+                    </div>
+                </div>
+
+                <!-- Trust Badges (Dipindah dari atas ke bawah Galeri) -->
+                <div class="mt-12 pt-8 border-t border-slate-200/60 flex flex-col items-center">
                     <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Sudah Di Gunakan Oleh</p>
                     
                     <!-- Wadah Marquee (3 Baris) -->
