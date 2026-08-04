@@ -738,9 +738,13 @@
                 <h3 id="exportTitle" class="text-base md:text-lg font-bold text-gray-500 mb-1.5 md:mb-2">Menunggu Pemrosesan</h3>
                 <p id="exportDesc" class="text-xs md:text-sm text-gray-400 text-center px-4 mb-5 md:mb-6 font-medium">Unggah data Excel terlebih dahulu untuk ekspor.</p>
                 
-                <div class="flex w-full justify-center px-4 max-w-sm">
+                <div class="flex flex-col w-full justify-center px-4 max-w-sm gap-2">
                     <button id="exportExcelBtn" disabled class="w-full py-3 md:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 bg-gray-300 text-gray-500 cursor-not-allowed text-xs md:text-sm">
                         <i class="ph ph-file-xls text-lg md:text-xl"></i> Unduh Excel (.xlsx)
+                    </button>
+                    <!-- Tambahan Tombol CSV -->
+                    <button id="exportCsvBtn" disabled class="w-full py-3 md:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 bg-gray-300 text-gray-500 cursor-not-allowed text-xs md:text-sm">
+                        <i class="ph ph-file-csv text-lg md:text-xl"></i> Unduh CSV (.csv)
                     </button>
                 </div>
             </div>
@@ -1349,7 +1353,10 @@
         const tableSection = document.getElementById('tableSection');
         const templateSection = document.getElementById('templateSection');
         const emptyState = document.getElementById('emptyState');
+        
         const exportExcelBtn = document.getElementById('exportExcelBtn');
+        const exportCsvBtn = document.getElementById('exportCsvBtn'); // Ditambahkan
+        
         const rowCountBadge = document.getElementById('rowCount');
         const copyTemplateBtn = document.getElementById('copyTemplateBtn');
         const exportCard = document.getElementById('exportCard');
@@ -1491,11 +1498,16 @@
                 
                 exportTitle.textContent = "Data Siap Diekspor";
                 exportTitle.className = "text-base md:text-lg font-bold text-gray-900 mb-1.5 md:mb-2";
-                exportDesc.textContent = "Data siap diunduh ke dalam format Excel.";
+                exportDesc.textContent = "Data siap diunduh ke dalam format Excel atau CSV.";
                 exportDesc.className = "text-xs md:text-sm text-gray-500 text-center px-4 mb-5 md:mb-6 font-medium";
 
+                // Update Style Tombol Excel (Diaktifkan)
                 exportExcelBtn.disabled = false;
-                exportExcelBtn.className = "w-full max-w-sm px-4 py-3 md:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 green-shadow-btn text-xs md:text-sm";
+                exportExcelBtn.className = "w-full px-4 py-3 md:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 green-shadow-btn text-xs md:text-sm";
+                
+                // Update Style Tombol CSV (Diaktifkan)
+                exportCsvBtn.disabled = false;
+                exportCsvBtn.className = "w-full px-4 py-3 md:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 dark-shadow-btn text-xs md:text-sm";
             } else {
                 exportCard.className = "dark-shadow-card relative flex flex-col items-center justify-center p-8 md:p-10 transition-all duration-300 min-h-[220px] md:min-h-[260px] bg-gray-50 border-2 border-transparent";
                 exportIconWrapper.className = "w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gray-200 flex items-center justify-center mb-3 md:mb-4 border border-gray-300";
@@ -1506,8 +1518,13 @@
                 exportDesc.textContent = "Unggah data Excel terlebih dahulu untuk ekspor.";
                 exportDesc.className = "text-xs md:text-sm text-gray-400 text-center px-4 mb-5 md:mb-6 font-medium";
 
+                // Update Style Tombol Excel (Dinonaktifkan)
                 exportExcelBtn.disabled = true;
-                exportExcelBtn.className = "w-full max-w-sm px-4 py-3 md:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 bg-gray-300 text-gray-500 cursor-not-allowed text-xs md:text-sm";
+                exportExcelBtn.className = "w-full px-4 py-3 md:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 bg-gray-300 text-gray-500 cursor-not-allowed text-xs md:text-sm";
+                
+                // Update Style Tombol CSV (Dinonaktifkan)
+                exportCsvBtn.disabled = true;
+                exportCsvBtn.className = "w-full px-4 py-3 md:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 bg-gray-300 text-gray-500 cursor-not-allowed text-xs md:text-sm";
             }
         }
 
@@ -1522,6 +1539,9 @@
             }
         }
 
+        // ==========================================
+        // EKSPOR KE EXCEL (.xlsx)
+        // ==========================================
         exportExcelBtn.addEventListener('click', function() {
             if (processedDataGlobal.length === 0) return;
 
@@ -1542,7 +1562,41 @@
             const workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, worksheet, 'Data Kontak WA');
             
-            XLSX.writeFile(workbook, 'File Hicare.xlsx');
+            XLSX.writeFile(workbook, 'File_Hicare.xlsx');
+        });
+
+        // ==========================================
+        // EKSPOR KE CSV (.csv) - DITAMBAHKAN
+        // ==========================================
+        exportCsvBtn.addEventListener('click', function() {
+            if (processedDataGlobal.length === 0) return;
+
+            let csvContent = "whatsapp,Nama,Panggilan,Alamat\n";
+
+            processedDataGlobal.forEach((row) => {
+                if (!row.IsValid) return;
+                
+                // Menghapus tanda kutip (") dan membersihkan baris baru agar struktur CSV tidak rusak
+                const wa = row.CleanWa;
+                const nama = row.Nama || '';
+                const panggilan = row.Panggilan || '';
+                const alamat = (row.Alamat || '').toString().replace(/\r?\n|\r/g, ' ');
+
+                csvContent += `${wa},${nama},${panggilan},${alamat}\n`;
+            });
+
+            // Membuat Blob dan URL Objek untuk men-trigger download
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute("href", url);
+            link.setAttribute("download", "File_Hicare.csv");
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         });
     </script>
 </body>
